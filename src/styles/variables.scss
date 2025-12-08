@@ -1,0 +1,126 @@
+// Google Brand Colors
+$google-blue: #4285F4;
+$google-red: #EA4335;
+$google-yellow: #FBBC04;
+$google-green: #34A853;
+
+// Light Theme Colors
+$bg-dark: #ffffff;
+$bg-dark-secondary: #f8f9fa;
+$bg-dark-card: #ffffff;
+$text-primary: #1a1a1a;
+$text-secondary: #666666;
+$text-faded: #3b3b3b5e;
+
+// Spacing
+$spacing-xs: 0.4rem;
+$spacing-sm: 0.8rem;
+$spacing-md: 1.6rem;
+$spacing-lg: 3.2rem;
+$spacing-xl: 4.8rem;
+
+// Breakpoints
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1024px;
+$breakpoint-desktop: 1440px;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin responsive($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin dual-layer-heading {
+  position: relative;
+  
+  .heading-back {
+    font-size: 4.8rem;
+    font-weight: 900;
+    color: $text-faded;
+    opacity: 0.15;
+    position: absolute;
+    top: -1.6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 0;
+    
+    @include responsive($breakpoint-mobile) {
+      font-size: 2rem;
+      top: -0.8rem;
+    }
+  }
+  
+  .heading-front {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: $text-primary;
+    position: relative;
+    z-index: 1;
+    
+    @include responsive($breakpoint-mobile) {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+@mixin circuit-background {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 100px,
+        rgba(66, 133, 244, 0.08) 100px,
+        rgba(66, 133, 244, 0.08) 101px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 100px,
+        rgba(66, 133, 244, 0.08) 100px,
+        rgba(66, 133, 244, 0.08) 101px
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+@mixin google-button($color) {
+  background: $color;
+  color: $text-primary;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba($color, 0.4);
+  }
+  
+  @include responsive($breakpoint-mobile) {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+}

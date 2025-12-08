@@ -1,0 +1,71 @@
+@import '../../styles/variables.scss';
+
+.about-gdg {
+  background-color: $bg-dark-secondary;
+  
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    @include responsive($breakpoint-tablet) {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+  
+  &__text {
+    order: 1;
+    
+    @include responsive($breakpoint-tablet) {
+      order: 2;
+    }
+    
+    h3 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: $google-red;
+      
+      @include responsive($breakpoint-mobile) {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+    
+    p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: $text-secondary;
+      margin-bottom: 1rem;
+      
+      @include responsive($breakpoint-mobile) {
+        font-size: 0.9rem;
+      }
+    }
+  }
+  
+  &__illustration {
+    @include flex-center;
+    order: 2;
+    
+    @include responsive($breakpoint-tablet) {
+      order: 1;
+    }
+    
+    img, svg {
+      width: 100%;
+      max-width: 450px;
+      height: auto;
+      filter: drop-shadow(0 8px 24px rgba(234, 67, 53, 0.2));
+      animation: float 6s infinite ease-in-out 1s;
+      
+      @include responsive($breakpoint-mobile) {
+        max-width: 320px;
+      }
+    }
+  }
+}

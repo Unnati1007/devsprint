@@ -1,0 +1,137 @@
+@import '../../styles/variables.scss';
+
+.footer {
+  background: $bg-dark-secondary;
+  border-top: 1px solid rgba(66, 133, 244, 0.2);
+  padding: $spacing-lg 5%;
+  
+  &__content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $spacing-lg;
+    
+    @include responsive($breakpoint-tablet) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+  
+  &__left {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+  
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-xs;
+    
+    @include responsive($breakpoint-tablet) {
+      justify-content: center;
+    }
+    
+    &-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, $google-blue, $google-red, $google-yellow, $google-green);
+      border-radius: 12px;
+      @include flex-center;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: $text-primary;
+      box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+    }
+    
+    &-text {
+      display: flex;
+      flex-direction: column;
+      
+      .brand {
+        font-size: 1rem;
+        font-weight: 700;
+        color: $text-primary;
+        line-height: 1.2;
+      }
+      
+      .event {
+        font-size: 0.7rem;
+        color: $text-secondary;
+      }
+    }
+  }
+  
+  &__copyright {
+    font-size: 0.7rem;
+    color: $text-secondary;
+    
+    .highlight {
+      color: $google-blue;
+      font-weight: 600;
+    }
+  }
+  
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+  
+  &__social {
+    display: flex;
+    gap: $spacing-sm;
+    
+    a {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      @include flex-center;
+      background: $bg-dark-card;
+      color: $text-secondary;
+      font-size: 1.3rem;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      
+      &:hover {
+        transform: translateY(-5px);
+        color: $text-primary;
+        border-color: currentColor;
+        box-shadow: 0 8px 20px rgba(66, 133, 244, 0.2);
+      }
+      
+      &.twitter:hover {
+        border-color: #1DA1F2;
+        color: #1DA1F2;
+        box-shadow: 0 8px 20px rgba(29, 161, 242, 0.4);
+      }
+      
+      &.linkedin:hover {
+        border-color: #0A66C2;
+        color: #0A66C2;
+        box-shadow: 0 8px 20px rgba(10, 102, 194, 0.4);
+      }
+      
+      &.instagram:hover {
+        border-color: #E4405F;
+        color: #E4405F;
+        box-shadow: 0 8px 20px rgba(228, 64, 95, 0.4);
+      }
+      
+      &.github:hover {
+        border-color: $text-primary;
+        color: $text-primary;
+        box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+      }
+      
+      &.discord:hover {
+        border-color: #5865F2;
+        color: #5865F2;
+        box-shadow: 0 8px 20px rgba(88, 101, 242, 0.4);
+      }
+    }
+  }
+}
