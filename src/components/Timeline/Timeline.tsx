@@ -135,7 +135,9 @@ export default function Timeline() {
                 return (
                   <div
                     key={i}
-                    ref={el => (eventRefs.current[i] = el)}
+                    ref={el => {
+                      eventRefs.current[i] = el;
+                    }}
                     className={`${styles.timeline__item} ${
                       visible ? styles.visible : ''
                     }`}
