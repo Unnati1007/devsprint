@@ -252,7 +252,7 @@ export default function RegisterPage() {
 
                       <h3 className={styles.sectionTitle}>Select Seminars</h3>
                     </div>
-                    <p className={styles.sectionDescription}>Choose one or more seminars you'd like to attend</p>
+                    <p className={styles.sectionDescription}>Choose one or more seminars you&apos;d like to attend</p>
 
                     <div className={styles.seminarsGrid}>
                       {seminars.map((seminar) => {
@@ -347,7 +347,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div className={styles.benefits}>
-                  <h4 className={styles.benefitsTitle}>What You'll Get</h4>
+                  <h4 className={styles.benefitsTitle}>What You&apos;ll Get</h4>
                   <ul className={styles.benefitsList}>
                     <li>
                       
