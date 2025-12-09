@@ -45,11 +45,50 @@
   }
 }
 
-.team-title {
+// Dual Heading Effect
+.dual-heading {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.heading-back {
+  font-size: 5rem;
+  font-weight: 900;
+  color: #f0f0f0;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+  user-select: none;
+  
+  @media (max-width: 1024px) {
+    font-size: 4rem;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+  }
+}
+
+.heading-front {
   font-size: 2.5rem;
   font-weight: 700;
   color: #333;
-  margin-bottom: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  margin: 0;
+  white-space: nowrap;
   
   @media (max-width: 1024px) {
     font-size: 2.2rem;
@@ -57,7 +96,6 @@
   
   @media (max-width: 768px) {
     font-size: 1.8rem;
-    margin-bottom: 10px;
   }
   
   @media (max-width: 480px) {
@@ -444,6 +482,10 @@
   .team-card__role {
     color: #0000ff;
   }
+  
+  .heading-back {
+    color: #d0d0d0;
+  }
 }
 
 // Reduced motion preference
@@ -457,5 +499,58 @@
   
   .team-card {
     opacity: 1;
+  }
+}
+
+// Compact version for very small screens
+@media (max-width: 360px) {
+  .team-card {
+    padding: 16px 10px;
+    min-height: 240px;
+    
+    &__image-wrapper {
+      width: 65px;
+      height: 65px;
+      margin-bottom: 12px;
+    }
+    
+    &__name {
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    
+    &__role {
+      font-size: 0.75rem;
+      margin-bottom: 8px;
+    }
+    
+    &__description {
+      font-size: 0.72rem;
+      margin-bottom: 12px;
+      -webkit-line-clamp: 2;
+    }
+    
+    &__social {
+      gap: 6px;
+      padding-top: 10px;
+    }
+    
+    &__social-link {
+      width: 28px;
+      height: 28px;
+      
+      svg {
+        width: 13px;
+        height: 13px;
+      }
+    }
+  }
+  
+  .heading-back {
+    font-size: 1.8rem;
+  }
+  
+  .heading-front {
+    font-size: 1.4rem;
   }
 }

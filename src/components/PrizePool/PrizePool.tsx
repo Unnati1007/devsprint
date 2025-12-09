@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './PrizePool.module.scss'
 
 interface Prize {
@@ -14,15 +14,17 @@ interface Prize {
 
 export default function PrizePool() {
   const prizeRefs = useRef<(HTMLDivElement | null)[]>([])
+  const headerRef = useRef<HTMLDivElement>(null)
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false)
+  const [isCardVisible, setIsCardVisible] = useState(Array(3).fill(false))
   
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const headerObserver = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry, index) => {
-          if (entry.isIntersecting && entry.target) {
-            setTimeout(() => {
-              entry.target.classList.add(styles.visible)
-            }, index * 200)
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsHeaderVisible(true)
+            headerObserver.unobserve(entry.target)
           }
         })
       },
@@ -32,14 +34,39 @@ export default function PrizePool() {
       }
     )
 
+    const cardObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-index') || '0')
+            setIsCardVisible(prev => {
+              const newState = [...prev]
+              newState[index] = true
+              return newState
+            })
+            cardObserver.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -30px 0px'
+      }
+    )
+
+    if (headerRef.current) {
+      headerObserver.observe(headerRef.current)
+    }
+
     const currentRefs = prizeRefs.current
     currentRefs.forEach((ref) => {
-      if (ref) observer.observe(ref)
+      if (ref) cardObserver.observe(ref)
     })
 
     return () => {
+      if (headerRef.current) headerObserver.unobserve(headerRef.current)
       currentRefs.forEach((ref) => {
-        if (ref) observer.unobserve(ref)
+        if (ref) cardObserver.unobserve(ref)
       })
     }
   }, [])
@@ -50,24 +77,24 @@ export default function PrizePool() {
       icon: '🏆',
       perks: 'Cash Prize + Exclusive Swags + Certificates + Internship Opportunities',
       className: 'first',
-      gradient: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
-      glow: 'rgba(255, 215, 0, 0.15)'
+      gradient: 'linear-gradient(135deg, #fbbc04 0%, #ea8600 100%)',
+      glow: 'rgba(251, 188, 4, 0.15)'
     },
     {
       rank: 'Top 10',
       icon: '✨',
       perks: 'Premium Swags + Certificates + Featured on Our Platform',
       className: 'second',
-      gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      glow: 'rgba(102, 126, 234, 0.15)'
+      gradient: 'linear-gradient(135deg, #4285f4 0%, #1a73e8 100%)',
+      glow: 'rgba(66, 133, 244, 0.15)'
     },
     {
       rank: 'All Participants',
       icon: '🎉',
       perks: 'Certificates of Participation + Goodies + Networking Opportunities',
       className: 'third',
-      gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-      glow: 'rgba(240, 147, 251, 0.15)'
+      gradient: 'linear-gradient(135deg, #ea4335 0%, #c62828 100%)',
+      glow: 'rgba(234, 67, 53, 0.15)'
     }
   ]
 
@@ -78,33 +105,23 @@ export default function PrizePool() {
         <div className={styles.decorationCircle1}></div>
         <div className={styles.decorationCircle2}></div>
         <div className={styles.decorationCircle3}></div>
+        <div className={styles.decorationLine1}></div>
+        <div className={styles.decorationLine2}></div>
+        <div className={styles.dotPattern}></div>
       </div>
 
       <div className={styles.container}>
-        {/* Enhanced Header */}
-        <div className={styles.prizeHeader}>
-          <div className={styles.sectionBadge}>
-            <span className={styles.badgeText}>PRIZES & REWARDS</span>
-            <div className={styles.badgeLine}></div>
-          </div>
-          
-          <h2 className={styles.prizeTitle}>
-            <span className={styles.titleMain}>Win Amazing</span>
-            <span className={styles.titleAccent}> Prizes</span>
+
+        {/* NEW UPDATED HEADING WITH SIMILAR STYLING AS RULES */}
+        <div className="dual-heading" ref={headerRef}>
+          <div className={styles.headingBack}>WIN AMAZING PRIZES</div>
+          <h2 className={`${styles.headingFront} ${isHeaderVisible ? styles.visible : ''}`}>
+            Win Amazing Prizes
           </h2>
-          
-          <p className={styles.prizeSubtitle}>
-            Compete for incredible rewards, recognition, and career opportunities
-          </p>
-          
-          <div className={styles.titleDecoration}>
-            <span className={styles.decorationLine}></span>
-            <span className={styles.decorationIcon}>✦</span>
-            <span className={styles.decorationLine}></span>
-          </div>
         </div>
 
-        {/* Prize Cards Container */}
+
+        {/* Prize Cards */}
         <div className={styles.prizeContainer}>
           <div className={styles.prizeCards}>
             {prizes.map((prize, index) => (
@@ -113,55 +130,44 @@ export default function PrizePool() {
                 ref={el => {
                   if (el) prizeRefs.current[index] = el
                 }}
-                className={`${styles.prizeCard} ${styles[prize.className]}`}
+                className={`${styles.prizeCard} ${styles[prize.className]} ${
+                  isCardVisible[index] ? styles.visible : ''
+                }`}
                 data-index={index}
               >
-                {/* Ribbon for First Place */}
                 {prize.className === 'first' && (
                   <div className={styles.ribbon}>
                     <span>🏆 GOLD</span>
                   </div>
                 )}
-                
-                {/* Card Background Elements */}
+
                 <div 
                   className={styles.cardGradient}
                   style={{ background: prize.gradient }}
                 ></div>
-                
+
                 <div className={styles.cardShine}></div>
-                
-                {/* Card Content */}
+
                 <div className={styles.cardContent}>
-                  {/* Icon */}
                   <div className={styles.iconWrapper}>
                     <div className={styles.iconBackground}>
-                      <div className={styles.prizeIcon}>
-                        {prize.icon}
-                      </div>
+                      <div className={styles.prizeIcon}>{prize.icon}</div>
                       <div 
                         className={styles.iconGlow}
-                        style={{ boxShadow: `0 0 40px ${prize.glow}` }}
+                        style={{ boxShadow: `0 0 35px ${prize.glow}` }}
                       ></div>
                     </div>
                   </div>
 
-                  {/* Rank */}
                   <div className={styles.rankContainer}>
-                    <h3 className={styles.prizeRank}>
-                      {prize.rank}
-                    </h3>
+                    <h3 className={styles.prizeRank}>{prize.rank}</h3>
                     <div className={styles.rankDivider}></div>
                   </div>
 
-                  {/* Perks */}
                   <div className={styles.perksContainer}>
-                    <p className={styles.prizePerks}>
-                      {prize.perks}
-                    </p>
+                    <p className={styles.prizePerks}>{prize.perks}</p>
                   </div>
 
-                  {/* Decorative Elements */}
                   <div className={styles.cardCorners}>
                     <div className={`${styles.corner} ${styles.cornerTL}`}></div>
                     <div className={`${styles.corner} ${styles.cornerTR}`}></div>
@@ -173,13 +179,21 @@ export default function PrizePool() {
             ))}
           </div>
         </div>
-        
+
         {/* Additional Info */}
-        {/* <div className={styles.additionalInfo}>
+        <div className={styles.additionalInfo}>
           <div className={styles.infoCard}>
-            
+            <div className={styles.infoIcon}>🎯</div>
+            <div className={styles.infoContent}>
+              <h4 className={styles.infoTitle}>Additional Benefits</h4>
+              <p className={styles.infoDescription}>
+                All winners get featured on our platform, LinkedIn shoutouts, 
+                and opportunities to connect with industry leaders.
+              </p>
+            </div>
           </div>
-        </div> */}
+        </div>
+
       </div>
     </section>
   )

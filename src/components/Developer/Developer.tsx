@@ -6,77 +6,82 @@ import styles from './Developer.module.scss'
 
 export default function TeamMembers() {
   const teamMembers = [
-    {
-      id: 1,
-      name: 'Akash Singh',
-      role: 'Content Lead',
-      description: 'Crafts compelling narratives that engage and inspire.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&q=80',
-      social: {
-        linkedin: 'https://www.linkedin.com/in/akash-singh-6bb244214/',
-        github: 'https://github.com/AkashSingh6260',
-        email: 'akki.akashsingh2005@gmail.com'
-      }
-    },
-    {
-      id: 2,
-      name: 'Tanushka Tiwari',
-      role: 'Graphic Lead',
-      description: 'Transforms ideas into stunning visual experiences.',
-      image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&q=80',
-      social: {
-        linkedin: 'https://www.linkedin.com/in/tanushka-tiwari2105/',
-        github: 'https://github.com/tanushkat96',
-        email: 'tanushkat96@gmail.com'
-      }
-    },
-    {
-      id: 3,
-      name: 'Jatin Pathak',
-      role: 'PR Lead',
-      description: 'Builds strong relationships and impactful strategies.',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&q=80',
-      social: {
-        linkedin: 'https://www.linkedin.com/in/jatin-pathak-a1a457281',
-        github: 'https://github.com/Jatzz26',
-        email: 'jatintp2604@gmail.com'
-      }
-    },
-    {
-      id: 4,
-      name: 'Devyash Rasela',
-      role: 'Technical Lead',
-      description: 'Drives innovation with cutting-edge solutions.',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&q=80',
-      social: {
-        linkedin: 'https://www.linkedin.com/in/devyash-rasela',
-        github: 'https://github.com/devyashrasela',
-        email: 'devyashrasela@gmail.com'
-      }
-    },
-    {
-      id: 5,
-      name: 'Rishita Mukherjee',
-      role: 'Social Media Lead',
-      description: 'Amplifies voice across digital platforms.',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&q=80',
-      social: {
-        linkedin: "http://www.linkedin.com/in/rishita-mukherjee-293045325",
-        github: "https://github.com/rishita-73",
-        email: "mukherjirishit.07@gmail.com"
-      }
+  {
+    id: 1,
+    name: 'Sanchit Jain',
+    role: 'FullStack Developer',
+    description: 'Develops complete web solutions with smooth frontend and powerful backend integration.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&q=80',
+    social: {
+      linkedin: 'https://www.linkedin.com/in/lnsanchit/',
+      github: 'https://github.com/Sanchit-codes',
+      email: 'sanchit.workspace@outlook.com'
     }
-  ]
+  },
+  {
+    id: 2,
+    name: 'Unnati Jadon',
+    role: 'Frontend Developer',
+    description: 'Creates clean, interactive, and user-friendly interfaces with smooth visual design.',
+    image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&q=80',
+    social: {
+      linkedin: 'http://www.linkedin.com/in/unnati-jadon-610414232',
+      github: 'https://github.com/Unnati1007',
+      email: 'unnatijadon1007@gmail.com'
+    }
+  },
+  {
+    id: 3,
+    name: 'Harsh Manmode',
+    role: 'Frontend Developer',
+    description: 'Builds secure APIs and scalable backend systems that keep applications running smoothly.',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&q=80',
+    social: {
+      linkedin: 'harshmanmode79@gmail.com',
+      github: 'https://github.com/Harsh-2006-git',
+      email: 'harshmanmode79@gmail.com ',
+    }
+  },
+  {
+    id: 4,
+    name: 'Prasun Singh',
+    role: 'Graphic Design',
+    description: 'Designs creative visuals, brand assets, and graphics that deliver clear visual impact.',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&q=80',
+    social: {
+      linkedin: 'https://www.linkedin.com/in/prasun-singh-704944329?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+      github: 'https://github.com/prasun568',
+      email: 'prasun5096@gmail.com'
+    }
+  },
+  {
+    id: 5,
+    name: 'Adya Acharya',
+    role: 'Content & Management',
+    description: 'Manages content, communication, and workflow to ensure smooth and organized execution.',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&q=80',
+    social: {
+      linkedin: "http://www.linkedin.com/in/adya-acharya",
+      github: "https://github.com/AdyaAcharya",
+      email: "adyaacharya10@gmail.com"
+    }
+  }
+]
+
 
   return (
     <section id="team" className={styles['team-section']}>
       <div className={styles['team-container']}>
         <div className={styles['team-header']}>
-          <h2 className={styles['team-title']}>Meet Our Developer</h2>
-          <p className={styles['team-subtitle']}>
-            Our diverse team brings together expertise and passion for excellence.
-          </p>
-        </div>
+  <div className={styles['dual-heading']}>
+    <div className={styles['heading-back']}>OUR DEVELOPER</div>
+    <h2 className={styles['heading-front']}>Meet Our Developer</h2>
+  </div>
+  
+  <p className={styles['team-subtitle']}>
+    Our diverse team brings together expertise and passion for excellence.
+  </p>
+</div>
 
         <div className={styles['team-grid']}>
           {teamMembers.map((member) => (
