@@ -4,17 +4,78 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './Timeline.module.scss';
 
 const events = [
-  { number: 1, title: 'Launch & Registrations Open', time: 'Dec 8 (Online)', description: 'Hackathon announcement and participant registrations begin.', color: 'blue' },
-  { number: 2, title: 'Development & Submission Window', time: 'Dec 8 - 27 (Online)', description: 'Participants work on their projects and submit before deadline.', color: 'green' },
-  { number: 3, title: 'Info Session', time: 'Dec 11 (Online)', description: 'Overview of rules, timeline, support, and event expectations.', color: 'yellow' },
-  { number: 4, title: 'Expert Session 1', time: 'Dec 22 (11:30 AM - 1:00 PM Online)', description: 'Session with CEO & Founder of AugmentAppz.', color: 'red' },
-  { number: 5, title: 'Expert Session 2', time: 'TBA (Online)', description: 'Session with esteemed MITS alumni.', color: 'blue' },
-  { number: 6, title: 'Additional Expert Sessions', time: 'TBA', description: 'More expert talks may be scheduled.', color: 'green' },
-  { number: 7, title: 'Project Evaluation', time: 'Dec 30 (Online)', description: 'Judges review submitted projects.', color: 'yellow' },
-  { number: 8, title: 'Top 10 Announcement & Pitching', time: 'Jan 7 (Online)', description: 'Top 10 teams pitch their projects to judges.', color: 'red' },
-  { number: 9, title: 'Final Round', time: 'Jan 10 (May be Offline)', description: 'Selected teams present final demos.', color: 'blue' },
-  { number: 10, title: 'Top 3 Winners Announcement', time: 'Before Jan 15 (Online)', description: 'Official declaration of winners.', color: 'green' },
+  { 
+    number: 1, 
+    title: 'Registrations Open + Team Formation Begins', 
+    time: 'Dec 8 (Online)', 
+    description: 'Participant registrations open and teams can start forming.', 
+    color: 'blue' 
+  },
+  { 
+    number: 2, 
+    title: 'Info Session + Project Submission Window Starts', 
+    time: 'Dec 11 (Online)', 
+    description: 'Information session covering rules, guidelines, help, and expectations. Project development begins.', 
+    color: 'green' 
+  },
+  { 
+    number: 3, 
+    title: 'Expert Session 1 — Samarth Sharma', 
+    time: 'Dec 21 (8:30 PM – 10:00 PM Online)', 
+    description: 'Expert talk and guidance session by Samarth Sharma.', 
+    color: 'yellow' 
+  },
+  { 
+    number: 4, 
+    title: 'Expert Session 2 — Balavigneshwaran Manogaran', 
+    time: 'Dec 22 (11:30 AM – 1:00 PM Online)', 
+    description: 'Expert talk with deep insights from industry experience.', 
+    color: 'red' 
+  },
+  { 
+    number: 5, 
+    title: 'Expert Session 3 — Kartikey Verma', 
+    time: 'Dec 24 (8:30 PM – 10:00 PM Online)', 
+    description: 'Expert mentoring and discussion session.', 
+    color: 'blue' 
+  },
+  { 
+    number: 6, 
+    title: 'Team Formation & Submission Deadline', 
+    time: 'Dec 27 (Online)', 
+    description: 'Last date to finalize teams and submit your project.', 
+    color: 'green' 
+  },
+  { 
+    number: 7, 
+    title: 'Initial Evaluation Window', 
+    time: 'Dec 28 – Jan 6 (Online)', 
+    description: 'Judges will review and evaluate the submitted projects.', 
+    color: 'yellow' 
+  },
+  { 
+    number: 8, 
+    title: 'Top 10 Teams Announcement', 
+    time: 'Jan 7 (Online)', 
+    description: 'Top 10 shortlisted teams will be announced.', 
+    color: 'red' 
+  },
+  { 
+    number: 9, 
+    title: 'Top 10 Pitching Round', 
+    time: 'Jan 10 (Online)', 
+    description: 'Shortlisted teams will pitch their solutions to judges.', 
+    color: 'blue' 
+  },
+  { 
+    number: 10, 
+    title: 'Final Results Announcement', 
+    time: 'Before Jan 15 (Online)', 
+    description: 'The top 3 winners of the hackathon will be officially announced.', 
+    color: 'green' 
+  },
 ];
+
 
 export default function Timeline() {
   const [activeEvent, setActiveEvent] = useState(0);

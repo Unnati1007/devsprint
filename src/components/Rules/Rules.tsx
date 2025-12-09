@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './Rules.module.scss'
 
 export default function Rules() {
@@ -14,17 +14,18 @@ export default function Rules() {
     'A short written solution description (around 100 words) must be included.',
     'Projects must be created after 1st December, 2025 to remain eligible.',
     'Participants must upload submissions using the provided template.',
-    'All submission materials (code, documentation, demo, slides) must be in English.',
+    'All submission materials must be in English.',
   ]
 
   const faqs = [
     {
       question: 'Who can participate in DevSprint?',
-      answer: 'Anyone who is passionate about technology, regardless of experience level, can participate.',
+      answer:
+        'Anyone who is passionate about technology, regardless of experience level, can participate.',
     },
     {
       question: 'Is there a registration fee?',
-      answer: 'No, DevSprint participation is completely free of cost for all attendees.',
+      answer: 'No, DevSprint participation is completely free of cost.',
     },
     {
       question: 'Can I participate solo or do I need a team?',
@@ -32,18 +33,44 @@ export default function Rules() {
     },
     {
       question: 'What should I bring to the event?',
-      answer: 'Bring your laptop, charger, valid ID, and any additional items you need for development. Wi-Fi and workspace will be provided.',
+      answer:
+        'Bring your laptop, charger, valid ID, and anything else you may need. Wi-Fi and workspace are provided.',
     },
   ]
 
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
+  const [visibleRules, setVisibleRules] = useState<number[]>([])
+  const [isHovered, setIsHovered] = useState(false)
 
-  const toggleFaq = (index: number) => {
+  const toggleFaq = (index: number) =>
     setOpenFaqIndex(openFaqIndex === index ? null : index)
-  }
+
+  useEffect(() => {
+    // Animate rules sequentially
+    const timer = setInterval(() => {
+      if (visibleRules.length < rules.length) {
+        setVisibleRules(prev => [...prev, visibleRules.length])
+      } else {
+        clearInterval(timer)
+      }
+    }, 100) // Adjust timing for animation speed
+
+    return () => clearInterval(timer)
+  }, [visibleRules.length, rules.length])
 
   return (
     <section id="faq" className={`section ${styles.rules}`}>
+      {/* Animated Background Elements */}
+      <div className={styles.backgroundAnimation}>
+        <div className={styles.particle}></div>
+        <div className={styles.particle}></div>
+        <div className={styles.particle}></div>
+        <div className={styles.particle}></div>
+        <div className={styles.particle}></div>
+        <div className={styles.pulse}></div>
+        <div className={styles.pulse}></div>
+      </div>
+
       <div className="container">
         <div className="dual-heading">
           <div className="heading-back">FAQs & RULES</div>
@@ -51,49 +78,79 @@ export default function Rules() {
         </div>
 
         <div className={styles.rules__wrapper}>
-          {/* Rules Section */}
+          {/* RULES SECTION */}
           <div className={styles.rules__content}>
             <div className={styles.rules__text}>
               <h3>Rules & Guidelines</h3>
-              <p>To ensure a fair and enjoyable experience for everyone, please adhere to the following rules.</p>
+              <p>
+                To ensure a fair and enjoyable experience for everyone, please
+                adhere to the following rules.
+              </p>
             </div>
 
-            <div className={styles.rules__code}>
-              <div className={styles.rules__window}>
+            <div 
+              className={styles.rules__code}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <div className={`${styles.rules__window} ${isHovered ? styles.hovered : ''}`}>
                 <div className={styles.rules__header}>
                   <div className={styles.rules__buttons}>
                     <span className={styles.rules__button} data-color="red"></span>
-                    <span className={styles.rules__button} data-color="yellow"></span>
-                    <span className={styles.rules__button} data-color="green"></span>
+                    <span
+                      className={styles.rules__button}
+                      data-color="yellow"
+                    ></span>
+                    <span
+                      className={styles.rules__button}
+                      data-color="green"
+                    ></span>
                   </div>
                   <div className={styles.rules__filename}>rules.txt</div>
                 </div>
+
                 <div className={styles.rules__body}>
                   <pre>
                     {rules.map((rule, index) => (
-                      <div key={index} className={styles.rules__line}>
-                        <span className={styles.rules__number}>{index + 1}.</span> {rule}
+                      <div
+                        key={index}
+                        className={`${styles.rules__line} ${
+                          visibleRules.includes(index) ? styles.visible : ''
+                        }`}
+                        style={{
+                          '--delay': `${index * 0.1}s`,
+                          '--index': index,
+                        } as React.CSSProperties}
+                      >
+                        <span className={styles.rules__number}>
+                          {index + 1}.
+                        </span>{' '}
+                        {rule}
                       </div>
                     ))}
-                    <div className={styles.rules__comment}>
-                      {`// Have fun and build something amazing!`}
-                    </div>
+
+                    
                   </pre>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* FAQ Section */}
+          {/* FAQ SECTION */}
           <div className={styles.faq}>
             <div className={styles.faq__content}>
               <div className={styles.faq__heading}>
-                <h3>Frequently Asked <br />Questions</h3>
+                <h3>
+                  Frequently Asked <br /> Questions
+                </h3>
               </div>
 
               <div className={styles.faq__list}>
                 {faqs.map((faq, index) => (
-                  <div key={index} className={styles.faq__item}>
+                  <div 
+                    key={index} 
+                    className={`${styles.faq__item} ${openFaqIndex === index ? styles.active : ''}`}
+                  >
                     <button
                       className={styles.faq__question}
                       onClick={() => toggleFaq(index)}
@@ -103,8 +160,12 @@ export default function Rules() {
                       <span
                         className={styles.faq__plus}
                         style={{
-                          transform: openFaqIndex === index ? 'rotate(45deg)' : 'rotate(0deg)',
-                          color: openFaqIndex === index ? '#1a73e8' : undefined
+                          transform:
+                            openFaqIndex === index
+                              ? 'rotate(45deg)'
+                              : 'rotate(0deg)',
+                          color:
+                            openFaqIndex === index ? '#1a73e8' : undefined,
                         }}
                       >
                         +

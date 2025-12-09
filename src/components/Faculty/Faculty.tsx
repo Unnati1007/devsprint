@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
-import styles from './TeamMembers.module.scss'
+import styles from './Faculty.module.scss'
 
 export default function TeamMembers() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)

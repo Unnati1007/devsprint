@@ -75,10 +75,9 @@ export default function Header() {
   const navItems = [
     { href: '#home', label: 'Home' },
     { href: '#about', label: 'About' },
-    { href: '#tracks', label: 'Tracks' },
-    { href: '#timeline', label: 'Schedule' },
+    { href: '#timeline', label: 'Timeline' },
     { href: '#event', label: 'Events' },
-
+    { href: '#team', label: 'Team' },
     { href: '#faq', label: 'FAQ' },
   ]
 

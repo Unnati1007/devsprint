@@ -9,6 +9,8 @@ import Rules from '@/components/Rules/Rules'
 import Tracks from '@/components/Tracks/Tracks'
 import Footer from '@/components/Footer/Footer'
 import TeamMembers from '@/components/Team/Team'
+import Developer from '@/components/Developer/Developer'
+import Faculty from '@/components/Faculty/Faculty'
 
 export default function Home() {
   return (
@@ -21,9 +23,13 @@ export default function Home() {
       <OtherEvents />
       <PrizePool />
       <Tracks />
-      <Rules />
+      <Faculty/>
       <TeamMembers />
+      <Developer/>
+      <Rules />
       <Footer />
+      
+
     </main>
   )
 }
