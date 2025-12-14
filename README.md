@@ -2,6 +2,14 @@
 
 A dark-themed, multi-page Next.js website for DevSprint hackathon event organized by Google Developer Groups MITS.
 
+## 🌐 Live Demo
+
+Experience DevSprint live on:
+
+- **Vercel (Primary):** https://devsprint-nine.vercel.app/
+- **MITS Server:** https://devsprint.mitsgwalior.in/
+
+
 ## Features
 
 - 🎨 **Dark Theme** with Google brand colors
